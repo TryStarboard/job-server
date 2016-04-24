@@ -5,14 +5,14 @@
 const program = require('commander');
 
 program
-  .option('--complaint-id <complaint-id>')
+  .option('--user-id <user-id>')
   .parse(process.argv);
 
 const queue = require('../../src/queue');
 
 queue
   .create('sync-stars', {
-    user_id: 1,
+    user_id: program.userId,
   })
   .removeOnComplete(true)
   .save((err) => {
