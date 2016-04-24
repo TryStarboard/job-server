@@ -1,0 +1,55 @@
+{
+  "name": "job-server",
+  "version": "31.0.0",
+  "private": true,
+  "description": "",
+  "author": "Daiwei Lu <daiweilu123@gmail.com> (http://daiwei.lu)",
+  "license": "MIT",
+  "engines": {
+    "node": "5.10.0",
+    "npm": "3.8.3"
+  },
+  "dependencies": {
+    "bluebird": "3.3.4",
+    "bunyan": "1.8.0",
+    "co": "4.6.0",
+    "config": "1.20.0",
+    "cookies": "0.5.1",
+    "event-stream": "3.3.2",
+    "ioredis": "1.15.1",
+    "jade": "^1.11.0",
+    "knex": "0.10.0",
+    "kue": "0.10.5",
+    "le_node": "1.2.0",
+    "lodash": "4.8.2",
+    "maxcon": "2.4.0",
+    "octonode": "0.7.5",
+    "parse-link-header": "0.4.1",
+    "passport-github": "1.1.0",
+    "pg": "4.5.2",
+    "ramda": "0.19.1",
+    "raven": "^0.10.0",
+    "request-promise": "2.0.1",
+    "rx": "4.1.0"
+  },
+  "devDependencies": {
+    "commander": "^2.9.0",
+    "docker-build-layers": "0.0.2",
+    "eslint": "2.7.0",
+    "eslint-plugin-node": "^1.0.0",
+    "mz": "2.4.0",
+    "nodemon": "1.9.1",
+    "onchange": "2.2.0",
+    "scripty": "1.5.0"
+  },
+  "scripts": {
+    "clean": "rm -rf lib",
+    "lint": "eslint --rulesdir eslint-rules source config script *.js migrations",
+    "watch:lint": "npm run lint -s && onchange 'src/**/*.js' 'config/*.js' '*.js' -v -- npm run lint -s",
+    "test": "",
+    "check": "npm run lint && npm test",
+    "e2e:create-job": "scripty",
+    "e2e": "scripty",
+    "start": "node --harmony_destructuring --harmony_default_parameters src/index.js"
+  }
+}
