@@ -1,16 +1,16 @@
 'use strict';
 
-const kue    = require('kue');
-const config = require('config');
-const Redis  = require('ioredis');
-const log    = require('../../shared-backend/log');
+const kue               = require('kue');
+const config            = require('config');
+const createRedisClient = require('../../shared-backend/redis').createClient;
+const log               = require('../../shared-backend/log');
 
 const REDIS_CONFIG = config.get('redis');
 
 const queue = kue.createQueue({
   redis: {
     createClientFactory() {
-      return new Redis(REDIS_CONFIG);
+      return createRedisClient(REDIS_CONFIG, log);
     }
   }
 });

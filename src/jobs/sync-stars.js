@@ -1,12 +1,11 @@
 'use strict';
 
-const config         = require('config');
-const Redis          = require('ioredis');
-const redisClient    = require('../../../shared-backend/redis').client;
-const log            = require('../../../shared-backend/log');
-const startSyncStars = require('./SyncStars');
+const config            = require('config');
+const createRedisClient = require('../../../shared-backend/redis').createClient;
+const log               = require('../../../shared-backend/log');
+const startSyncStars    = require('./SyncStars');
 
-const pub = new Redis(config.get('redis'));
+const redisClient = createRedisClient(config.get('redis'), log);
 
 module.exports = function (job, done) {
   const data = job.data;
@@ -31,11 +30,11 @@ module.exports = function (job, done) {
     case 'DELETED_ITEM':
       i += 1;
       job.progress(i, total);
-      pub.publish(channel, JSON.stringify({
+      redisClient.publish(channel, JSON.stringify({
         type: 'PROGRESS_DATA_ITEM',
         progress: Math.round(i / total * 100) / 100,
       }));
-      pub.publish(channel, JSON.stringify(event));
+      redisClient.publish(channel, JSON.stringify(event));
       break;
     default:
       // No additional case
