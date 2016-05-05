@@ -12,6 +12,8 @@ deployment:
     commands:
       - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
       - docker build -t daiweilu/starboard-job-server:$CIRCLE_TAG .
+      - docker tag daiweilu/starboard-job-server:$CIRCLE_TAG daiweilu/starboard-job-server:latest
       - mkdir -p ~/docker; docker save daiweilu/starboard-job-server:$CIRCLE_TAG > ~/docker/image.tar
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push daiweilu/starboard-job-server:$CIRCLE_TAG
+      - docker push daiweilu/starboard-job-server:latest
