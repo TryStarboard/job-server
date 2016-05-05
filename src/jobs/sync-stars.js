@@ -1,8 +1,8 @@
 'use strict';
 
 const config            = require('config');
-const createRedisClient = require('../../../shared-backend/redis').createClient;
-const log               = require('../../../shared-backend/log');
+const createRedisClient = require('@starboard/shared-backend/redis').createClient;
+const log               = require('@starboard/shared-backend/log');
 const startSyncStars    = require('./SyncStars');
 
 const redisClient = createRedisClient(config.get('redis'), log);

@@ -2,8 +2,8 @@
 
 const kue               = require('kue');
 const config            = require('config');
-const createRedisClient = require('../../shared-backend/redis').createClient;
-const log               = require('../../shared-backend/log');
+const createRedisClient = require('@starboard/shared-backend/redis').createClient;
+const log               = require('@starboard/shared-backend/log');
 
 const REDIS_CONFIG = config.get('redis');
 

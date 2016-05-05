@@ -5,8 +5,8 @@ const co              = require('co');
 const {wrap}          = require('co');
 const {Observable}    = require('rx');
 const parseLinkHeader = require('parse-link-header');
-const {github}        = require('../../../../shared-backend/github');
-const db              = require('../../../../shared-backend/db');
+const {github}        = require('@starboard/shared-backend/github');
+const db              = require('@starboard/shared-backend/db');
 
 const transformRepo = curry(function (id, {starred_at, repo}) {
   const transformed = pick([

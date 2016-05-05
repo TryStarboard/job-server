@@ -1,6 +1,6 @@
 'use strict';
 
-const log       = require('../../shared-backend/log');
+const log       = require('@starboard/shared-backend/log');
 const queue     = require('./queue');
 const syncStars = require('./jobs/sync-stars');
 
