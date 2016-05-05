@@ -1,0 +1,9 @@
+config/local*
+local
+node_modules
+scripts
+**/.eslintrc.yml
+.dockerignore
+.git
+.gitignore
+circle.yml

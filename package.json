@@ -27,13 +27,13 @@
     "scripty": "1.5.0"
   },
   "scripts": {
-    "clean": "rm -rf lib",
-    "lint": "eslint --rulesdir eslint-rules source config script *.js migrations",
+    "lint": "eslint src config scripts *.js",
     "watch:lint": "npm run lint -s && onchange 'src/**/*.js' 'config/*.js' '*.js' -v -- npm run lint -s",
     "test": "",
     "check": "npm run lint && npm test",
     "e2e:create-job": "scripty",
     "e2e": "scripty",
-    "start": "node --harmony_destructuring --harmony_default_parameters src/index.js"
+    "start": "node --harmony_destructuring --harmony_default_parameters src/index.js",
+    "postversion": "git push && git push --tags"
   }
 }

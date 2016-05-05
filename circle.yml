@@ -1,0 +1,17 @@
+machine:
+  node:
+    version: 5.11.0
+  services:
+    - docker
+dependencies:
+  cache_directories:
+    - ~/docker
+deployment:
+  release:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    commands:
+      - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+      - docker build -t daiweilu/starboard-job-server:$CIRCLE_TAG .
+      - mkdir -p ~/docker; docker save daiweilu/starboard-job-server:$CIRCLE_TAG > ~/docker/image.tar
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push daiweilu/starboard-job-server:$CIRCLE_TAG
