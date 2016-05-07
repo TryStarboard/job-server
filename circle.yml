@@ -1,19 +1,28 @@
 machine:
+  environment:
+    PROJECT_NAME: daiwei-lu
+    CLUSTER_NAME: hobby-cluster
+    CLOUDSDK_COMPUTE_ZONE: us-central1-f
   node:
     version: 5.11.0
   services:
     - docker
 dependencies:
-  cache_directories:
-    - ~/docker
+  pre:
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update kubectl
+    - echo $GCLOUD_SERVICE_ACCOUNT_KEY | base64 --decode > $HOME/account-auth.json
+    - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $HOME/account-auth.json
+    - sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_NAME
+    - sudo /opt/google-cloud-sdk/bin/gcloud config set compute/zone $CLOUDSDK_COMPUTE_ZONE
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
+    - sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
 deployment:
   release:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
-      - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
       - docker build -t daiweilu/starboard-job-server:$CIRCLE_TAG .
-      - docker tag daiweilu/starboard-job-server:$CIRCLE_TAG daiweilu/starboard-job-server:latest
-      - mkdir -p ~/docker; docker save daiweilu/starboard-job-server:$CIRCLE_TAG > ~/docker/image.tar
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push daiweilu/starboard-job-server:$CIRCLE_TAG
-      - docker push daiweilu/starboard-job-server:latest
+      - kubectl patch --record deployment/starboard-job-server -p '{"spec":{"template":{"spec":{"containers":[{"name":"starboard-job-server","image":"daiweilu/starboard-job-server:'"$CIRCLE_TAG"'"}]}}}}'
