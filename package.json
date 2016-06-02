@@ -10,7 +10,7 @@
     "npm": "3.8.3"
   },
   "dependencies": {
-    "@starboard/shared-backend": "1.1.1",
+    "@starboard/shared-backend": "2.1.0",
     "co": "4.6.0",
     "config": "1.21.0",
     "kue": "0.11.0",
