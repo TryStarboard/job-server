@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "commander": "^2.9.0",
-    "eslint": "2.13.0",
+    "eslint": "2.13.1",
     "eslint-plugin-node": "^1.0.0",
     "nodemon": "1.9.2",
     "onchange": "2.5.0",
