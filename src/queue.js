@@ -1,17 +1,12 @@
 'use strict';
 
-const kue               = require('kue');
-const config            = require('config');
-const createRedisClient = require('@starboard/shared-backend/redis').createClient;
-const log               = require('@starboard/shared-backend/log');
-
-const REDIS_CONFIG = config.get('redis');
+const kue = require('kue');
+const {createClient} = require('./redis');
+const log = require('./log');
 
 const queue = kue.createQueue({
   redis: {
-    createClientFactory() {
-      return createRedisClient(REDIS_CONFIG, log);
-    }
+    createClientFactory: createClient
   }
 });
 

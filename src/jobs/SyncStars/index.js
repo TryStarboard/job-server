@@ -1,8 +1,8 @@
 'use strict';
 
-const {Observable, Subject}         = require('rx');
+const {Observable, Subject} = require('rx');
 const {propEq, concat, prop, pluck} = require('ramda');
-const {Maxcon}                      = require('maxcon');
+const {Maxcon} = require('maxcon');
 const {
   createRepoSource,
   reposSelector,

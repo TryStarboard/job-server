@@ -1,11 +1,8 @@
 'use strict';
 
-const config            = require('config');
-const createRedisClient = require('@starboard/shared-backend/redis').createClient;
-const log               = require('@starboard/shared-backend/log');
-const startSyncStars    = require('./SyncStars');
-
-const redisClient = createRedisClient(config.get('redis'), log);
+const {sharedClient: redisClient} = require('../redis');
+const log = require('../log');
+const startSyncStars = require('./SyncStars');
 
 module.exports = function (job, done) {
   const data = job.data;

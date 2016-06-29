@@ -1,12 +1,13 @@
 'use strict';
 
-const {curry, curryN, pluck, filter, identity, uniq, pick, map, omit, pipe, path, defaultTo} = require('ramda');
-const co              = require('co');
-const {wrap}          = require('co');
-const {Observable}    = require('rx');
+const {curry, curryN, pluck, filter, identity, uniq, pick, map, omit, pipe,
+  path, defaultTo} = require('ramda');
+const co = require('co');
+const {wrap} = require('co');
+const {Observable} = require('rx');
 const parseLinkHeader = require('parse-link-header');
-const {github}        = require('@starboard/shared-backend/github');
-const db              = require('@starboard/shared-backend/db');
+const {client: github} = require('../../github');
+const {db} = require('../../models');
 
 const transformRepo = curry(function (id, {starred_at, repo}) {
   const transformed = pick([

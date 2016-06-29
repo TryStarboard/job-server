@@ -1,7 +1,7 @@
 'use strict';
 
-const log       = require('@starboard/shared-backend/log');
-const queue     = require('./queue');
+const log = require('./log');
+const queue = require('./queue');
 const syncStars = require('./jobs/sync-stars');
 
 queue.process('sync-stars', 5, function (job, done) {
