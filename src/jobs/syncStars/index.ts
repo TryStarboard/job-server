@@ -6,7 +6,9 @@ import deleteRepos from './deleteRepos';
 
 interface SyncStarEvent {
   type: string;
-  data: any;
+  repoIds: string[];
+  totalPage?: number;
+  currentPage?: number;
 }
 
 export default async function (userId: string) {
@@ -15,16 +17,21 @@ export default async function (userId: string) {
 
   return new Observable<SyncStarEvent>((subscriber: Subscriber<SyncStarEvent>) => {
     const subscription = dataSource
-      .flatMap<string[]>((data) => saveData(user, data.repos))
-      .do((repoIds) => subscriber.next({
-        type: 'REPOS_TOUCHED',
-        data: repoIds,
-      }))
+      .flatMap<string[]>(async function (data) {
+        const repoIds = await saveData(user, data.repos);
+        subscriber.next({
+          type: 'REPOS_TOUCHED',
+          repoIds,
+          totalPage: data.totalPage,
+          currentPage: data.currentPage,
+        });
+        return repoIds;
+      })
       .reduce<string[]>((touchedRepoIds, repoIds) => touchedRepoIds.concat(repoIds), [])
       .flatMap<string[]>((repoIds) => deleteRepos(user, repoIds))
       .do((repoIds) => subscriber.next({
         type: 'REPOS_DELETED',
-        data: repoIds,
+        repoIds,
       }))
       .subscribe(
         null,

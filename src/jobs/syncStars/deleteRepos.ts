@@ -10,7 +10,7 @@ export default async function (user: UserInstance, repoIds: string[]) {
         }
       },
       transaction: t,
-    })
+    });
 
     await Promise.all(repos.map(r => r.destroy({transaction: t})));
 
