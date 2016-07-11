@@ -7,8 +7,6 @@ machine:
     version: 5.11.0
   services:
     - docker
-dependencies:
-  pre:
 test:
   override:
     - npm run setup
