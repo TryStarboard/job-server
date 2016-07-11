@@ -18,10 +18,15 @@ dependencies:
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
     - sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+test:
+  override:
+    - npm run setup
+    - npm test
 deployment:
   release:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
+      - npm run build
       - docker build -t daiweilu/starboard-job-server:$CIRCLE_TAG .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push daiweilu/starboard-job-server:$CIRCLE_TAG

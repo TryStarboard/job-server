@@ -8,7 +8,7 @@ program
   .option('--user-id <user-id>')
   .parse(process.argv);
 
-const queue = require('../../src/queue');
+const queue = require('../../src-js/queue');
 
 queue
   .create('sync-stars', {
