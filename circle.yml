@@ -21,6 +21,7 @@ dependencies:
 test:
   override:
     - npm run setup
+    - npm run build
     - npm test
 deployment:
   release:
