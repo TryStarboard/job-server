@@ -12,7 +12,7 @@
   "dependencies": {
     "@starboard/github": "0.0.1",
     "@starboard/log": "1.0.2",
-    "@starboard/models": "2.0.1",
+    "@starboard/models": "3.0.0",
     "@starboard/redis": "1.1.0",
     "co": "4.6.0",
     "config": "1.21.0",
