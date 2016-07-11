@@ -11,3 +11,5 @@ local*
 /typings/browser*
 /.idea
 .tmp
+lib
+typings

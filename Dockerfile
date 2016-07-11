@@ -6,6 +6,7 @@ ADD package.json /app/
 RUN npm install
 
 ADD config /app/config
-ADD src /app/src
+ADD src-js /app/src-js
+ADD lib /app/lib
 
-CMD ["node", "--harmony_destructuring", "--harmony_default_parameters", "src/index.js"]
+CMD ["node", "--harmony_destructuring", "--harmony_default_parameters", "src-js/index.js"]

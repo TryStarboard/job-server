@@ -1,0 +1,24 @@
+{
+  "compileOnSaveDefinition": false,
+  "compilerOptions": {
+    "declaration": false,
+    "diagnostics": false,
+    "listFiles": false,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "lib",
+    "pretty": true,
+    "removeComments": true,
+    "target": "es6",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/syncStars/index.ts"
+  ]
+}
