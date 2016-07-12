@@ -3,7 +3,7 @@ import {DataSourceRepoData} from './createDataSource';
 import {Repo, Tag, sequelize} from '../../models';
 
 interface RepoDataForUpsert {
-  github_id: number;
+  github_id: string;
   full_name: string;
   description?: string;
   homepage?: string;
@@ -33,9 +33,11 @@ export default async function (user: UserInstance, reposData: DataSourceRepoData
 };
 
 function getGithubIdToLanguageMap(reposData: DataSourceRepoData[]) {
-  const map = new Map<number, string>();
+  const map = new Map<string, string>();
   for (const d of reposData) {
-    map.set(d.github_id, d.language);
+    if (d.language) {
+      map.set(d.github_id.toString(), d.language);
+    }
   }
   return map;
 }
@@ -43,9 +45,8 @@ function getGithubIdToLanguageMap(reposData: DataSourceRepoData[]) {
 function getRepoIdToTagIdMap(
   repos: RepoInstance[],
   tags: TagInstance[],
-  githubIdToLanguageMap: Map<number, string>
+  githubIdToLanguageMap: Map<string, string>
 ): Map<RepoInstance, TagInstance> {
-
   const newMap = new Map<RepoInstance, TagInstance>();
   for (const repo of repos) {
     const tag = tags.find(t => t.text === githubIdToLanguageMap.get(repo.github_id));
@@ -63,7 +64,7 @@ async function upsertRepos(user: UserInstance, reposData: DataSourceRepoData[]):
 
 function transformReposData(data: DataSourceRepoData[]): RepoDataForUpsert[] {
   return data.map<RepoDataForUpsert>(d => ({
-    github_id: d.github_id,
+    github_id: d.github_id.toString(),
     full_name: d.full_name,
     description: d.description,
     homepage: d.homepage,
