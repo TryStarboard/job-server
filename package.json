@@ -38,6 +38,6 @@
     "build": "npm run clean && tsc",
     "preversion": "npm run build && npm test",
     "postversion": "git push && git push --tags",
-    "start-dev": "nodemon -w src-js -w lib -w config -x 'node --harmony_destructuring --harmony_default_parameters src-js/index.js'"
+    "dev": "scripty"
   }
 }
