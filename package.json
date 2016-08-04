@@ -17,7 +17,7 @@
     "config": "1.21.0",
     "kue": "0.11.1",
     "parse-link-header": "0.4.1",
-    "ramda": "0.21.0",
+    "ramda": "0.22.0",
     "rxjs": "5.0.0-beta.10"
   },
   "devDependencies": {
