@@ -1,4 +1,4 @@
-FROM nodesource/trusty:5.11.0
+FROM nodesource/trusty:6.3.1
 
 RUN mkdir /app
 WORKDIR /app
@@ -9,4 +9,4 @@ ADD config /app/config
 ADD src-js /app/src-js
 ADD lib /app/lib
 
-CMD ["node", "--harmony_destructuring", "--harmony_default_parameters", "src-js/index.js"]
+CMD ["node", "src-js/index.js"]
