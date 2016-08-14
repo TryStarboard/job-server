@@ -1,17 +1,15 @@
-#!/usr/bin/env node --harmony_destructuring --harmony_default_parameters
+'use strict'
 
-'use strict';
-
-const program = require('commander');
-const syncStars = require('../../lib/jobs/syncStars').default;
+const program = require('commander')
+const syncStars = require('../../lib/jobs/syncStars').default
 
 process.on('unhandledRejection', (reason) => {
-  console.log(reason);
-});
+  console.log(reason)
+})
 
 program
   .option('--user-id <user-id>')
-  .parse(process.argv);
+  .parse(process.argv)
 
 syncStars(program.userId)
   .then((stream) => {
@@ -19,5 +17,5 @@ syncStars(program.userId)
       (data) => console.log(data),
       (err) => console.error(err.stack),
       () => console.log('completed')
-    );
-  });
+    )
+  })
