@@ -1,24 +1,22 @@
-#!/usr/bin/env node --harmony_destructuring --harmony_default_parameters
+'use strict'
 
-'use strict';
-
-const program = require('commander');
+const program = require('commander')
 
 program
   .option('--user-id <user-id>')
-  .parse(process.argv);
+  .parse(process.argv)
 
-const queue = require('../../src-js/queue');
+const queue = require('../../src-js/queue')
 
 queue
   .create('sync-stars', {
-    user_id: program.userId,
+    user_id: program.userId
   })
   .removeOnComplete(true)
   .save((err) => {
     if (err) {
-      throw err;
+      throw err
     }
-    console.log('added');
-    process.exit(0);
-  });
+    console.log('added')
+    process.exit(0)
+  })
