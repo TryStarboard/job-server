@@ -9,7 +9,7 @@
     "node": "6.3.1"
   },
   "dependencies": {
-    "@starboard/github": "0.0.1",
+    "@starboard/github": "1.0.0",
     "@starboard/log": "1.0.2",
     "@starboard/models": "3.0.1",
     "@starboard/redis": "1.1.0",
