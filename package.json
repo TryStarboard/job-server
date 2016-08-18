@@ -23,7 +23,7 @@
     "commander": "2.9.0",
     "eslint": "3.3.1",
     "eslint-config-d6u": "1.2.1",
-    "nodemon": "1.10.1",
+    "nodemon": "1.10.2",
     "onchange": "2.5.0",
     "scripty": "1.6.0",
     "tslint": "3.14.0",
