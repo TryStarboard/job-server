@@ -13,7 +13,7 @@
     "@starboard/log": "2.0.0",
     "@starboard/models": "4.0.0",
     "@starboard/redis": "2.0.0",
-    "config": "1.21.0",
+    "config": "1.23.0",
     "kue": "0.11.1",
     "parse-link-header": "0.4.1",
     "ramda": "0.22.1",
